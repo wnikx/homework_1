@@ -64,18 +64,18 @@ class GamePole:
         for i in self.pole:
             print(*i)
 
-    def open(self, cor_1, cor_2):
+    def open_cage(self, cor_1, cor_2):
         """ Функция открывает клетку """
 
         self.pole[cor_1][cor_2].fl_open = True
 
 
 # pole_game = GamePole(10, 12)
-# pole_game.open(1, 3)
-# pole_game.open(2, 3)
-# pole_game.open(3, 3)
-# pole_game.open(4, 3)
-# pole_game.open(5, 3)
-# pole_game.open(6, 3)
+# pole_game.open_cage(1, 3)
+# pole_game.open_cage(2, 3)
+# pole_game.open_cage(3, 3)
+# pole_game.open_cage(4, 3)
+# pole_game.open_cage(5, 3)
+# pole_game.open_cage(6, 3)
 # pole_game.show()
 # Чтобы открыть все клетки удали 11 и 15 строчку и выровняй по синтаксису :)
