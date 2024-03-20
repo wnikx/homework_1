@@ -2,12 +2,18 @@ import random
 
 
 class Cell:
-    def __init__(self, mine=False, arround_mines=0):
-        self.arround_mines = arround_mines
-        self.mine = mine
-        self.fl_open = False
+    """ Класс для предстваления клетки игрового поля """
+
+    def __init__(self, mine: bool = False, arround_mines: int = 0):
+        """ Инициализация клетки для игрового поля """
+
+        self.arround_mines: int = arround_mines
+        self.mine: bool = mine
+        self.fl_open: bool = False
 
     def __repr__(self):
+        """ Отображение на игровом поле """
+
         if self.fl_open:
             if self.mine:
                 return " * "
@@ -16,13 +22,17 @@ class Cell:
 
 
 class GamePole:
-    def __init__(self, n, m):
+    """ Класс для управления игровым полем """
+
+    def __init__(self, n: int, m: int):
+        """ Инициализация игрового поля """
+
         self.n = n
         self.m = m
-        self.pole = self.create_board()
+        self._pole = self.create_board()
         self.init()
 
-    def create_board(self):
+    def create_board(self) -> list:
         """ Создаем поле """
 
         return [[Cell() for i in range(self.n)] for j in range(self.n)]
@@ -30,13 +40,13 @@ class GamePole:
     def init(self):
         """ Инициализация поля """
 
-        mines = self.mines_place()
+        mines = self._mines_place()
         for row, col in mines:
-            self.pole[row][col].mine = True
-            self.update_arround_mines(
+            self._pole[row][col].mine = True
+            self._update_arround_mines(
                 row, col)
 
-    def mines_place(self):
+    def _mines_place(self) -> list:
         """ Выбираем случайные координаты для мин """
 
         result = []
@@ -48,7 +58,7 @@ class GamePole:
                 result.append((int(place[0]), int(place[1])))
         return result
 
-    def update_arround_mines(self, row, col):
+    def _update_arround_mines(self, row: int, col: int):
         """ Вычисляем кол-во мин по соседству """
 
         directions = [(i, j) for i in range(-1, 2)
@@ -56,18 +66,18 @@ class GamePole:
         for dr, dc in directions:
             new_row, new_col = row + dr, col + dc
             if 0 <= new_row < self.n and 0 <= new_col < self.n:
-                self.pole[new_row][new_col].arround_mines += 1
+                self._pole[new_row][new_col].arround_mines += 1
 
     def show(self):
         """ Демонстрация поля """
 
-        for i in self.pole:
+        for i in self._pole:
             print(*i)
 
-    def open_cage(self, cor_1, cor_2):
+    def open_cage(self, cor_1: int, cor_2: int):
         """ Функция открывает клетку """
 
-        self.pole[cor_1][cor_2].fl_open = True
+        self._pole[cor_1][cor_2].fl_open = True
 
 
 # pole_game = GamePole(10, 12)
@@ -78,4 +88,4 @@ class GamePole:
 # pole_game.open_cage(5, 3)
 # pole_game.open_cage(6, 3)
 # pole_game.show()
-# Чтобы открыть все клетки удали 11 и 15 строчку и выровняй по синтаксису :)
+# # Чтобы открыть все клетки удали 11 и 15 строчку и выровняй по синтаксису :)

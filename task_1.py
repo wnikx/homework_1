@@ -1,25 +1,41 @@
 class ObjList:
-    def __init__(self, data):
-        self.__data = data
-        self.__prev = None
-        self.__next = None
+    """ Объект ObjList """
 
-    def get_data(self):
+    def __init__(self, data: str):
+        """ Инициализация объекта ObjList """
+
+        self.__data: str = data
+        self.__prev: str | None = None
+        self.__next: str | None = None
+
+    def get_data(self) -> str:
+        """ Получение значение приватного свойства __data """
+
         return self.__data
 
-    def set_data(self, value):
+    def set_data(self, value: str) -> None:
+        """ Изменение приватного свойства __data на значение value """
+
         self.__data = value
 
-    def get_next(self):
+    def get_next(self) -> str | None:
+        """ Получение значение приватного свойства __next """
+
         return self.__next
 
-    def set_next(self, value):
+    def set_next(self, value: str) -> None:
+        """ Изменение приватного свойства __next на значение value """
+
         self.__next = value
 
-    def get_prev(self):
+    def get_prev(self) -> str | None:
+        """ Получение значение приватного свойства __prev """
+
         return self.__prev
 
-    def set_prev(self, value):
+    def set_prev(self, value: str) -> None:
+        """ Изменение приватного свойства __next на значение value """
+
         self.__prev = value
 
     data = property(get_data, set_data)
@@ -28,11 +44,17 @@ class ObjList:
 
 
 class LinkedList:
-    def __init__(self):
-        self.head = None
-        self.tail = None
+    """ Класс представляет связный список """
 
-    def add_obj(self, obj):
+    def __init__(self):
+        """ Инициализация связного списка """
+
+        self.head: None | ObjList = None
+        self.tail: None | ObjList = None
+
+    def add_obj(self, obj: ObjList) -> None:
+        """ Добавление нового объекта obj класса ObjList в конец связнаго списка """
+
         if not self.head:
             self.head = obj
             self.tail = obj
@@ -44,7 +66,9 @@ class LinkedList:
             obj.prev = current
             self.tail = current.next
 
-    def remove_obj(self):
+    def remove_obj(self) -> None:
+        """ Удаление последнего объекта из связного списка """
+
         last = self.tail
         if last:
             if last.prev:
@@ -53,7 +77,9 @@ class LinkedList:
                 self.head = None
                 self.tail = None
 
-    def get_data(self):
+    def get_data(self) -> list:
+        """ Получение списка из строк локального свойства __data всех объектов связного списка """
+
         result_lst = list()
         current = self.head
         while current:
